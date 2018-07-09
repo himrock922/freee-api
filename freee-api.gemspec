@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["t.yagi@bitstar.tokyo"]
 
   spec.summary       = %q{Freee Api}
-  spec.description   = %q{Wrapper of freee api}
+  spec.description   = %q{Wrapper of freee api. This gem using of wrapper via signet. signet is Apache 2.0 License. Therefore, This library using Apache 2.0 License code too.}
   spec.homepage      = "https://github.com/himrock922/freee-api.git"
   spec.license       = "MIT"
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "signet"
 end

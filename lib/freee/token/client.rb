@@ -31,6 +31,10 @@ module Freee
         res.body
       end
     
+      def authorize(redirect_uri)
+        @client.auth_code.authorize_url(redirect_uri: redirect_uri)
+      end
+
       def get_access_token(code)
         token = @client.auth_code.get_token(code, redirect_uri: "https://api.freee.co.jp/oauth/token")
       end

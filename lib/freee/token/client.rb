@@ -1,14 +1,18 @@
-require 'oauth2'
-require 'faraday'
-
 module Freee
   module Api
     class Token
+      SITE = 'https://api.freee.co.jp/'
+      SITE.freeze
+      AUTHORIZE_URL = 'https://secure.freee.co.jp/oauth/authorize'
+      AUTHORIZE_URL.freeze
+      TOKEN_URL = '/oauth/token'
+      TOKEN_URL.freeze
+
       def initialize(app_id, secret)
         options = {
-          site: "https://api.freee.co.jp/",
-          authorize_url: 'https://secure.freee.co.jp/oauth/authorize',
-          token_url: '/oauth/token'
+          site: SITE,
+          authorize_url: AUTHORIZE_URL,
+          token_url: TOKEN_URL
         }
         @client = OAuth2::Client.new(app_id, secret, options) do |conn|
           conn.request :url_encoded
@@ -19,6 +23,8 @@ module Freee
       end
 
       def development_authorize(app_id)
+        # MUST developmentのリダイレクトはfreeeのサーバにアクセスするため、一度freeeにログインする必要がある
+        # そのため、ログイン情報を渡す必要がある。 -> Cookieで渡す?
         client = Faraday.new(url: "https://secure.freee.co.jp")
         res = client.get do |req|
           req.url "/oauth/authorize",

@@ -49,8 +49,7 @@ module Freee
           code: code,
           redirect_uri: redirect_uri,
           headers: {
-            'Content-Type' => 'application/json',
-            'Authorization' => HTTPAuth::Basic.pack_authorization(@app_id, @secret)
+            'Content-Type' => 'application/json'
           }
         }
         @client.get_token(params).token

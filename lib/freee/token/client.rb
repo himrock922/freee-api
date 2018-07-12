@@ -9,12 +9,14 @@ module Freee
       TOKEN_URL.freeze
 
       def initialize(app_id, secret)
+        @app_id = app_id
+        @secret = secret
         options = {
           site: SITE,
           authorize_url: AUTHORIZE_URL,
           token_url: TOKEN_URL
         }
-        @client = OAuth2::Client.new(app_id, secret, options) do |conn|
+        @client = OAuth2::Client.new(@app_id, @secret, options) do |conn|
           conn.request :url_encoded
           conn.request :json
           conn.response :json, content_type: /\bjson$/
@@ -42,7 +44,16 @@ module Freee
       end
 
       def get_access_token(code, redirect_uri)
-        @client.auth_code.get_token(code, redirect_uri: redirect_uri)
+        params = {
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: redirect_uri,
+          headers: {
+            'Content-Type' => 'application/json',
+            'Authorization' => HTTPAuth::Basic.pack_authorization(@app_id, @secret)
+          }
+        }
+        @client.get_token(params).token
       end
     end
   end

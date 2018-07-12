@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["t.yagi@bitstar.tokyo"]
 
   spec.summary       = %q{Freee Api}
-  spec.description   = %q{Wrapper of freee api. This gem using of wrapper via signet. signet is Apache 2.0 License. Therefore, This library using Apache 2.0 License code too.}
+  spec.description   = %q{Wrapper of freee api. This gem using of wrapper via OAuth2.}
   spec.homepage      = "https://github.com/himrock922/freee-api.git"
   spec.license       = "MIT"
 

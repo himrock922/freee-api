@@ -41,6 +41,11 @@ module Freee
       def get_access_token(code, redirect_uri)
         @client.auth_code.get_token(code, redirect_uri: redirect_uri)
       end
+
+      def refresh_token(token, redirect_uri)
+        access_token = OAuth2::AccessToken.new(@client, token)
+        access_token.refresh(redirect_uri: redirect_uri) if access_token.expired?
+      end
     end
   end
 end

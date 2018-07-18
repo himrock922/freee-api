@@ -16,12 +16,7 @@ module Freee
           authorize_url: AUTHORIZE_URL,
           token_url: TOKEN_URL
         }
-        @client = OAuth2::Client.new(@app_id, @secret, options) do |conn|
-          conn.request :url_encoded
-          conn.request :json
-          conn.response :json, content_type: /\bjson$/
-          conn.adapter Faraday.default_adapter
-        end
+        @client = OAuth2::Client.new(@app_id, @secret, options)
       end
 
       def development_authorize(app_id)
@@ -44,15 +39,7 @@ module Freee
       end
 
       def get_access_token(code, redirect_uri)
-        params = {
-          grant_type: 'authorization_code',
-          code: code,
-          redirect_uri: redirect_uri,
-          headers: {
-            'Content-Type' => 'application/json'
-          }
-        }
-        @client.get_token(params).token
+        @client.auth_code.get_token(code, redirect_uri: redirect_uri)
       end
     end
   end

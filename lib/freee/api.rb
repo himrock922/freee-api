@@ -4,3 +4,4 @@ require 'faraday_middleware'
 
 require "freee/api/version"
 require "freee/token/client"
+require "freee/partners/client"

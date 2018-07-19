@@ -1,6 +1,7 @@
 module Freee
   module Api
     class Token
+      attr_reader :client
       SITE = 'https://api.freee.co.jp'
       SITE.freeze
       AUTHORIZE_URL = 'https://secure.freee.co.jp/oauth/authorize'
@@ -9,14 +10,12 @@ module Freee
       TOKEN_URL.freeze
 
       def initialize(app_id, secret)
-        @app_id = app_id
-        @secret = secret
         options = {
           site: SITE,
           authorize_url: AUTHORIZE_URL,
           token_url: TOKEN_URL
         }
-        @client = OAuth2::Client.new(@app_id, @secret, options)
+        @client = OAuth2::Client.new(app_id, secret, options)
       end
 
       def development_authorize(app_id)
@@ -42,9 +41,13 @@ module Freee
         @client.auth_code.get_token(code, redirect_uri: redirect_uri)
       end
 
-      def refresh_token(token, redirect_uri)
-        access_token = OAuth2::AccessToken.new(@client, token)
-        access_token.refresh(redirect_uri: redirect_uri) if access_token.expired?
+      def refresh_token(access_token, refresh_token, expires_at)
+        params = {
+          refresh_token: refresh_token,
+          expires_at: expires_at
+        }
+        @access_token = OAuth2::AccessToken.new(@client, access_token, params)
+        @access_token.refresh! if @access_token.expired?
       end
     end
   end

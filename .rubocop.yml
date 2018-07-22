@@ -1,0 +1,56 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - bin/*
+    - vendor/**/*
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Rails:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# allow Japanese comments
+AsciiComments:
+  Enabled: false
+
+# パラメータ列挙等もあるので行数・列幅は多少緩和する
+LineLength:
+  Max: 180
+
+ClassLength:
+  Max: 200
+
+ModuleLength:
+  Max: 200
+
+MethodLength:
+  Max: 50
+
+BlockLength:
+  Max: 50
+  Exclude:
+    - Rakefile
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
+# 概念上明らかなドキュメントは省略可能
+Documentation:
+  Enabled: false
+
+FileName:
+  Exclude:
+    - Capfile
+
+# ABC Sizeの基準値の緩和
+Metrics/AbcSize:
+  Max: 40
+

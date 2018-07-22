@@ -1,7 +1,9 @@
-require "freee/api/version"
+# frozen_string_literal: true
 
-module Freee
-  module Api
-    # Your code goes here...
-  end
-end
+require 'oauth2'
+require 'faraday'
+require 'faraday_middleware'
+
+require 'freee/api/version'
+require 'freee/token/client'
+require 'freee/partners/client'

@@ -1,8 +1,9 @@
-# Freee::Api
+[![Build Status](https://travis-ci.org/himrock922/freee-api.svg?branch=master)](https://travis-ci.org/himrock922/freee-api)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/freee/api`. To experiment with that code, run `bin/console` for an interactive prompt.
+# freee-api
 
-TODO: Delete this and the text above, and describe your gem
+このgemはfreeeサービスへ各データを登録できるようにしたクライアントライブラリです。
+freeeとの通信プロトコルはOAuth2を利用しています。
 
 ## Installation
 
@@ -22,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+編集中...
 
 ## Development
 
@@ -32,7 +33,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/freee-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+* Fork this repository on github
+* Make your changes and send me a pull request
+* If I like them I'll merge them
+* If I've accepted a patch, feel free to ask for a commit bit!
 
 ## License
 
@@ -40,4 +44,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Freee::Api project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/freee-api/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the freee-api project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/himrock922/freee-api/blob/master/CODE_OF_CONDUCT.md).

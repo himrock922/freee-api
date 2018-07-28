@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    freee-api (0.0.2)
+    freee-api (0.0.3)
       faraday (~> 0.12.2)
       faraday_middleware (~> 0.12.2)
       oauth2 (~> 1.4.0)
@@ -65,6 +65,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
     unicode-display_width (1.4.0)
+    yard (0.9.15)
 
 PLATFORMS
   ruby
@@ -76,6 +77,7 @@ DEPENDENCIES
   rake (~> 10.0)
   rspec (~> 3.0)
   rubocop (~> 0.58.1)
+  yard (~> 0.9.15)
 
 BUNDLED WITH
    1.16.3

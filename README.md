@@ -10,7 +10,7 @@ freeeとの通信プロトコルはOAuth2を利用しています。
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'freee-api'
+gem 'freee/api'
 ```
 
 And then execute:
@@ -23,7 +23,14 @@ Or install it yourself as:
 
 ## Usage
 
-編集中...
+### 事前準備
+
+freee APIを利用するためには、事前に利用するアプリケーションをfreeeに登録する必要があります。
+開発者のアカウントで[会計freee](https://secure.freee.co.jp/users/login)にログインし、https://secure.freee.co.jp/oauth/applications にアクセスし、「+新しいアプリケーションを登録」をクリックします。
+アプリケーションを登録することで表示されるアプリケーションIDとSecretが必要になります。
+
+詳しくは以下をご覧ください。
+[https://support.freee.co.jp/hc/ja/articles/115000145263-freee-API%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B#1](https://support.freee.co.jp/hc/ja/articles/115000145263-freee-API%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B#1)
 
 ## Development
 

@@ -28,13 +28,9 @@ module Freee
           token_url: TOKEN_URL
         }
 
-        if app_id.empty?
-          raise 'アプリケーションIDが入力されていません'
-        end
+        raise 'アプリケーションIDが入力されていません' if app_id.empty?
 
-        if secret.empty?
-          raise 'Secretが入力されていません'
-        end
+        raise 'Secretが入力されていません' if secret.empty?
         @client = OAuth2::Client.new(app_id, secret, options)
       end
 
@@ -48,9 +44,7 @@ module Freee
       # @param redirect_uri [String] redirect_url for Authentication Code
       # @return [String] Freee 本番環境用認証コードURL
       def authorize(redirect_uri)
-        if redirect_uri.empty?
-          raise '認証用コードを返すためのリダイレクトURLが指定されていません'
-        end
+        raise '認証用コードを返すためのリダイレクトURLが指定されていません' if redirect_uri.empty?
         @client.auth_code.authorize_url(redirect_uri: redirect_uri)
       end
 
@@ -59,12 +53,8 @@ module Freee
       # @param redirect_uri [String] redirect_url for Access Token
       # @return [Hash] アクセストークン
       def get_access_token(code, redirect_uri)
-        if code.empty?
-          raise '認証用コードが存在しません'
-        end
-        if redirect_uri.empty?
-          raise 'アクセストークンを返すためのリダイレクトURLが指定されていません'
-        end
+        raise '認証用コードが存在しません' if code.empty?
+        raise 'アクセストークンを返すためのリダイレクトURLが指定されていません' if redirect_uri.empty?
         begin
           @client.auth_code.get_token(code, redirect_uri: redirect_uri)
         rescue OAuth2::Error
@@ -78,15 +68,9 @@ module Freee
       # @param expires_at [Integer] アクセストークンの有効期限(UNIX TIME)
       # @return [Hash] アクセストークン
       def refresh_token(access_token, refresh_token, expires_at)
-        if access_token.empty?
-          raise 'アクセストークンが存在しません'
-        end
-        if expires_at.nil?
-          raise 'アクセストークンの有効期限が指定されていません'
-        end
-        if refresh_token.empty?
-          raise 'リフレッシュトークンが存在しません'
-        end
+        raise 'アクセストークンが存在しません' if access_token.empty?
+        raise 'アクセストークンの有効期限が指定されていません' if expires_at.nil?
+        raise 'リフレッシュトークンが存在しません' if refresh_token.empty?
         params = {
           refresh_token: refresh_token,
           expires_at: expires_at

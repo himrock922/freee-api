@@ -26,7 +26,7 @@ module Freee
       # @return [Hash] 取引先の結果
       def create_partner(access_token, params)
         @client.authorization :Bearer, access_token
-        response =　@client.post do |req|
+        response = @client.post do |req|
           req.url POST
           req.body = params.to_json
         end

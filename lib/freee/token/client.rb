@@ -1,13 +1,9 @@
 # frozen_string_literal: true
-
 module Freee
   module Api
     class Token
       # oauth-xx client(read only)
       attr_reader :client
-      # Freee API URL
-      SITE = 'https://api.freee.co.jp'
-      SITE.freeze
       # Freee 開発環境用認証コードURL
       DEVELOPMENT_REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob'
       DEVELOPMENT_REDIRECT_URL.freeze
@@ -23,7 +19,7 @@ module Freee
       # @param secret [String] Secret
       def initialize(app_id, secret)
         options = {
-          site: SITE,
+          site: Parameter::SITE,
           authorize_url: AUTHORIZE_URL,
           token_url: TOKEN_URL
         }

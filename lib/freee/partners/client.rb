@@ -21,7 +21,6 @@ module Freee
       # @param params [Hash] 新規作成用の取引先パラメータ
       # @return [Hash] GETレスポンスの結果
       def get_partners(access_token, params)
-        binding.pry
         raise 'アクセストークンが設定されていません' if access_token.empty?
         raise '事業所IDが設定されていません' unless params.has_key?(:company_id)
         @client.authorization :Bearer, access_token
@@ -29,11 +28,11 @@ module Freee
           req.url PATH
           req.body = params.to_json
         end
-        binding.pry
         case response.status
         when 401
-          raise 'Unauthorized', response.body
+          raise 'Unauthorized'
         end
+        response
       end
 
       # 取引先の作成
@@ -49,7 +48,7 @@ module Freee
         end
         case response.status
         when 401
-          raise 'Unauthorized', response.body
+          raise 'Unauthorized'
         end
       end
     end

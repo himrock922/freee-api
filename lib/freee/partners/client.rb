@@ -22,7 +22,7 @@ module Freee
       # @return [Hash] GETレスポンスの結果
       def get_partners(access_token, params)
         raise 'アクセストークンが設定されていません' if access_token.empty?
-        raise '事業所IDが設定されていません' unless params.has_key?(:company_id)
+        raise '事業所IDが設定されていません' unless params.key?(:company_id)
         @client.authorization :Bearer, access_token
         response = @client.get do |req|
           req.url PATH

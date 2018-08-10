@@ -26,7 +26,6 @@ module Freee
         }
 
         raise 'アプリケーションIDが入力されていません' if app_id.empty?
-
         raise 'Secretが入力されていません' if secret.empty?
         @client = OAuth2::Client.new(app_id, secret, options)
       end

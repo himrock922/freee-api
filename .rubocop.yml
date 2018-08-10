@@ -9,6 +9,9 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
+CyclomaticComplexity:
+  Max: 7
+
 Gemspec/OrderedDependencies:
   Enabled: false
 

@@ -51,6 +51,27 @@ module Freee
           raise 'Unauthorized'
         end
       end
+
+      # 取引先の更新
+      # https://developer.freee.co.jp/docs/accounting/reference#/Partners/put_api_1_partners_id
+      # @param access_token [String] アクセストークン
+      # @param params [Hash] 更新用の取引先パラメータ
+      # @return [Hash] PUTレスポンスの結果
+      def update_partner(access_token, params)
+        raise 'アクセストークンが設定されていません' if access_token.empty?
+        raise '事業所IDが設定されていません' unless params.key?(:company_id)
+        raise '取引先IDが設定されていません' unless params.key?(:id)
+        raise '取引先名が設定されていません' unless params.key?(:name)
+        @client.authorization :Bearer, access_token
+        response = @client.put do |req|
+          req.url PATH + '/' + params[:id].to_s
+          req.body = params.to_json
+        end
+        case response.status
+        when 401
+          raise 'Unauthorized'
+        end
+      end
     end
   end
 end

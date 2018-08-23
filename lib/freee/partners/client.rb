@@ -50,6 +50,7 @@ module Freee
         when 401
           raise 'Unauthorized'
         end
+        response
       end
 
       # 取引先の更新
@@ -71,6 +72,7 @@ module Freee
         when 401
           raise 'Unauthorized'
         end
+        response
       end
     end
   end

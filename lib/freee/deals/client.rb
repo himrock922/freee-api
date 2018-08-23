@@ -37,6 +37,7 @@ module Freee
         when 401
           raise 'Unauthorized'
         end
+        response
       end
     end
   end

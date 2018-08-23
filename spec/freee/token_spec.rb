@@ -33,16 +33,37 @@ RSpec.describe Freee::Api::Token do
         expect(subject.authorize('localhost')).to eq('https://secure.freee.co.jp/oauth/authorize?client_id=dummy_client_id&redirect_uri=localhost&response_type=code')
       end
       it '失敗' do
-        expect{subject.authorize('')}.to raise_error(RuntimeError, '認証用コードを返すためのリダイレクトURLが指定されていません')
+        expect { subject.authorize('') }.to raise_error(RuntimeError, '認証用コードを返すためのリダイレクトURLが指定されていません')
       end
     end
   end
 
   describe '#get_access_token' do
     context 'アクセストークンを取得する' do
+      before do
+        WebMock.stub_request(:post, 'https://api.freee.co.jp/oauth/token').to_return(
+          body: JSON.generate(
+            access_token: 'access_token',
+            token_type: 'bearer',
+            expires_in: 86_400,
+            refresh_token: 'refresh_token',
+            scope: 'read write'
+          ),
+          status: 200,
+          headers: { 'Content-Type' => 'application/json' }
+        )
+      end
+      it '200' do
+        response = subject.get_access_token('code', 'localhost')
+        expect(response.token).to eq 'access_token'
+        expect(response.params['token_type']).to eq 'bearer'
+        expect(response.expires_in).to eq 86_400
+        expect(response.params['scope']).to eq 'read write'
+        expect(response.refresh_token).to eq 'refresh_token'
+      end
       it '必要なパラメータが不足' do
-        expect{subject.get_access_token('', 'localhost')}.to raise_error(RuntimeError, '認証用コードが存在しません')
-        expect{subject.get_access_token('code', '')}.to raise_error(RuntimeError, 'アクセストークンを返すためのリダイレクトURLが指定されていません')
+        expect { subject.get_access_token('', 'localhost') }.to raise_error(RuntimeError, '認証用コードが存在しません')
+        expect { subject.get_access_token('code', '') }.to raise_error(RuntimeError, 'アクセストークンを返すためのリダイレクトURLが指定されていません')
       end
     end
   end

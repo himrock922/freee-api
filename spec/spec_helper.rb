@@ -2,7 +2,9 @@
 
 require 'bundler/setup'
 require 'freee/api'
+require 'webmock/rspec'
 
+WebMock.allow_net_connect!(net_http_connect_on_start: true)
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'

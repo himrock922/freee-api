@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-byebug', '~> 3.6.0'
   spec.add_development_dependency 'rubocop', '~> 0.58.1'
   spec.add_development_dependency 'yard', '~> 0.9.15'
+  spec.add_development_dependency 'webmock', '~> 3.4.2'
 
   spec.add_dependency 'oauth2', '~> 1.4.0'
   spec.add_dependency 'faraday', '~> 0.12.2'

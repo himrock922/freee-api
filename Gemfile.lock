@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    freee-api (0.0.5)
+    freee-api (0.0.6)
       faraday (~> 0.12.2)
       faraday_middleware (~> 0.12.2)
       oauth2 (~> 1.4.0)

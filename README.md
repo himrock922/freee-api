@@ -30,7 +30,78 @@ freee APIを利用するためには、事前に利用するアプリケーシ�
 アプリケーションを登録することで表示されるアプリケーションIDとSecretが必要になります。
 
 詳しくは以下をご覧ください。
+
 [https://support.freee.co.jp/hc/ja/articles/115000145263-freee-API%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B#1](https://support.freee.co.jp/hc/ja/articles/115000145263-freee-API%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B#1)
+
+### アクセストークンの取得(初回)
+
+各リクエストを行うために、アクセストークンの取得が必要となります。
+上記の、アプリケーションの登録後取得したアプリケーションIDとSecretを設定したOAuth2クライアントのオブジェクトを生成します。
+その後、認証コードを取得するために、POSTリクエストのレスポンスを返すコールバック用URLを設定します。
+
+```ruby
+
+oauth2 = Freee::Api::Token.new(application_id, secret)
+oauth2.authorize('localhost')
+
+```
+
+なお、本番環境では、POSTリエクスト用のコールバック用URLの指定が必要となりますが、開発環境・テスト環境の場合はブラウザアクセスでも認証コードが取得できます。
+その際は、
+
+`https://secure.freee.co.jp/oauth/authorize?client_id={application_id}&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code`
+
+でブラウザアクセスを行います。`application_id` は登録したアプリケーションのIDを指定してください。
+
+![https://support.freee.co.jp/hc/ja/article_attachments/115000319563/__________2016-12-16_16_52_40.png](https://support.freee.co.jp/hc/ja/article_attachments/115000319563/__________2016-12-16_16_52_40.png)
+
+取得した認証コードでアクセストークンを取得します。認証コードの有効期限は10分です。
+
+```ruby
+ response = oauth2.get_access_token('auth_code', 'localhost')
+```
+
+成功すると、レスポンスとして下記のようなアクセストークン、リフレッシュトークンが得られるため、この結果をDBに保存したりキャッシュで保持すれば、後はアクセストークン経由で各リクエストが実行できます。
+
+```ruby
+{ 
+"access_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 
+"token_type": "bearer", 
+"expires_in": 86400, 
+"refresh_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 
+"scope": "read write" 
+}
+```
+
+## このGemでできること
+
+このGemでは、Freeeの会計APIのリクエストを行えるようになります。
+各リクエストの概要・詳細は以下をご覧ください。
+
+[会計API概要](https://developer.freee.co.jp/docs/accounting)
+
+[会計APIリファレンス](https://developer.freee.co.jp/docs/accounting/reference)
+
+
+また、現在このGemのバージョンで対応しているリクエストは以下のドキュメントを参考にしてください。
+
+[https://www.rubydoc.info/gems/freee-api](https://www.rubydoc.info/gems/freee-api)
+
+
+不足しているリクエストの実装、ドキュメント生成に関しましては今しばらくお待ちください。
+issueに残していただければ、優先して対応します。
+
+### アクセストークンの取得(2回目以降)
+
+有効期限が切れたアクセストークンではリクエストを実行できないため、リフレッシュトークンを利用して新しいアクセストークンを取得します。
+
+```ruby
+oauth2 = Freee::Api::Token.new(application_id, secret)
+response = oauth2.refresh_token(access_token, refresh_token, expires_at)
+```
+
+アクセストークンの有効期限は24時間、リフレッシュトークンの有効期限は無制限です。
+
 
 ## Development
 

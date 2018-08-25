@@ -73,6 +73,17 @@ oauth2.authorize('localhost')
 }
 ```
 
+### アクセストークンの取得(2回目以降)
+
+有効期限が切れたアクセストークンではリクエストを実行できないため、リフレッシュトークンを利用して新しいアクセストークンを取得します。
+
+```ruby
+oauth2 = Freee::Api::Token.new(application_id, secret)
+response = oauth2.refresh_token(access_token, refresh_token, expires_at)
+```
+
+アクセストークンの有効期限は24時間、リフレッシュトークンの有効期限は無制限です。
+
 ## このGemでできること
 
 このGemでは、Freeeの会計APIのリクエストを行えるようになります。
@@ -90,18 +101,6 @@ oauth2.authorize('localhost')
 
 不足しているリクエストの実装、ドキュメント生成に関しましては今しばらくお待ちください。
 issueに残していただければ、優先して対応します。
-
-### アクセストークンの取得(2回目以降)
-
-有効期限が切れたアクセストークンではリクエストを実行できないため、リフレッシュトークンを利用して新しいアクセストークンを取得します。
-
-```ruby
-oauth2 = Freee::Api::Token.new(application_id, secret)
-response = oauth2.refresh_token(access_token, refresh_token, expires_at)
-```
-
-アクセストークンの有効期限は24時間、リフレッシュトークンの有効期限は無制限です。
-
 
 ## Development
 

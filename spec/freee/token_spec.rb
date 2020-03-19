@@ -14,7 +14,7 @@ RSpec.describe Freee::Api::Token do
       expect(subject.client.site).to eq('https://api.freee.co.jp')
     end
     it 'assigns authorize_uri from the options hash' do
-      expect(subject.client.authorize_url).to eq('https://secure.freee.co.jp/oauth/authorize')
+      expect(subject.client.authorize_url).to eq('https://accounts.secure.freee.co.jp/public_api/authorize')
     end
     it 'assigns token_uri from the options hash' do
       expect(subject.client.token_url).to eq('https://api.freee.co.jp/oauth/token')
@@ -23,14 +23,14 @@ RSpec.describe Freee::Api::Token do
 
   describe '#development_authorize' do
     it 'assigns development url' do
-      expect(subject.development_authorize).to eq('https://secure.freee.co.jp/oauth/authorize?client_id=dummy_client_id&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code')
+      expect(subject.development_authorize).to eq('https://accounts.secure.freee.co.jp/public_api/authorize?client_id=dummy_client_id&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code')
     end
   end
 
   describe '#authorize' do
     context '本番環境用の認証用コードを設定する' do
       it '成功' do
-        expect(subject.authorize('localhost')).to eq('https://secure.freee.co.jp/oauth/authorize?client_id=dummy_client_id&redirect_uri=localhost&response_type=code')
+        expect(subject.authorize('localhost')).to eq('https://accounts.secure.freee.co.jp/public_api/authorize?client_id=dummy_client_id&redirect_uri=localhost&response_type=code')
       end
       it '失敗' do
         expect { subject.authorize('') }.to raise_error(RuntimeError, '認証用コードを返すためのリダイレクトURLが指定されていません')

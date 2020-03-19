@@ -9,7 +9,7 @@ module Freee
       DEVELOPMENT_REDIRECT_URL = 'urn:ietf:wg:oauth:2.0:oob'
       DEVELOPMENT_REDIRECT_URL.freeze
       # Freee 認証コードURL
-      AUTHORIZE_URL = 'https://secure.freee.co.jp/oauth/authorize'
+      AUTHORIZE_URL = 'https://accounts.secure.freee.co.jp/oauth/authorize'
       AUTHORIZE_URL.freeze
       # Freee Token URL
       TOKEN_URL = '/oauth/token'

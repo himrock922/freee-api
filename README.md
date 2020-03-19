@@ -49,7 +49,7 @@ oauth2.authorize('localhost')
 なお、本番環境では、POSTリエクスト用のコールバック用URLの指定が必要となりますが、開発環境・テスト環境の場合はブラウザアクセスでも認証コードが取得できます。
 その際は、
 
-`https://secure.freee.co.jp/oauth/authorize?client_id={application_id}&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code`
+`https://accounts.secure.freee.co.jp/public_api/authorize?client_id={application_id}&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&response_type=code`
 
 でブラウザアクセスを行います。`application_id` は登録したアプリケーションのIDを指定してください。
 

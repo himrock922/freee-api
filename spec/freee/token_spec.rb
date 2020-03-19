@@ -14,7 +14,7 @@ RSpec.describe Freee::Api::Token do
       expect(subject.client.site).to eq('https://api.freee.co.jp')
     end
     it 'assigns authorize_uri from the options hash' do
-      expect(subject.client.authorize_url).to eq('https://secure.freee.co.jp/oauth/authorize')
+      expect(subject.client.authorize_url).to eq('https://accounts.secure.freee.co.jp/oauth/authorize')
     end
     it 'assigns token_uri from the options hash' do
       expect(subject.client.token_url).to eq('https://accounts.secure.freee.co.jp/public_api/oauth/token')

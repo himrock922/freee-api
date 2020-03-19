@@ -1,8 +1,8 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.4.6
-before_install: gem install bundler -v 2.0.1
+  - 2.5.7
+before_install: gem install bundler -v 2.1.4
 install: bundle install --deployment
 cache:
   directories: vendor/bundle

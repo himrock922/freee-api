@@ -10,7 +10,7 @@ freeeとの通信プロトコルはOAuth2を利用しています。
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'freee/api'
+gem 'freee-api'
 ```
 
 And then execute:
